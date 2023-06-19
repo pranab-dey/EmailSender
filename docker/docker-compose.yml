@@ -1,0 +1,25 @@
+version: '3.7'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  # App Service
+  app:
+    build:
+      context: ../
+      dockerfile: docker/app/Dockerfile
+      args:
+        - APP_ENV=${APP_ENV}
+        - HTTP_PROXY=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
+        - NO_PROXY=${NO_PROXY}
+        - BUILD_MODE=${BUILD_MODE}
+        - UID=${UID}
+        - GID=${GID}
+    container_name: palswalk-book-service
+    restart: unless-stopped
+    tty: true
+    networks:
+      - app-network

@@ -1,0 +1,29 @@
+# Git
+.git/
+
+# Node
+/src/node_modules/
+/src/npm-debug.log
+/src/yarn-error.log
+node_modules/
+
+# Editor directories and files
+**/.idea
+**/.vscode
+**/*.suo
+**/*.ntvs*
+**/*.njsproj
+**/*.sln
+**/*.sw*
+**/*.code-workspace
+**/*.sublime-*
+**/.settings/*
+**/nbproject/*
+**/.sass-cache/
+
+# Log files
+*.log*
+
+# Others
+**/.DS_Store
+
