@@ -1,32 +1,44 @@
 const mongoose = require('mongoose');
 
 const customerSchema = new mongoose.Schema(
-	{
-		name: {
-			type: String,
-			require: false,
-			index: true,
-		},
-		email: {
-			type: String,
-			require: false,
-			index: true,
-		},
-		address: {
-			type: String,
-			required: false,
-		},
-		isEnabled: {
-			type: Boolean,
-			required: false,
-			default: false,
-			index: true,
-		},
-	},
-	{
-		timestamps: true,
-	}
+  {
+    mUserEmail: {
+      type: String,
+      required: true,
+    },
+    mSendStatus: {
+      type: String,
+      default: false,
+    },
+    mSender: {
+      type: String,
+      required: true,
+    },
+    mProcessingTime: {
+      type: Date,
+      default: Date.now,
+    },
+    mCreatedAt: {
+      type: Date,
+      default: Date.now,
+    },
+    mScheduleAt: {
+      type: Date,
+      default: '',
+    },
+    mUserName: {
+      type: String,
+      default: '',
+    },
+    mAddress: {
+      type: String,
+      default: '',
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const customer = mongoose.model('customers', customerSchema);
+const customer = mongoose.model('Customers', customerSchema);
 module.exports = customer;

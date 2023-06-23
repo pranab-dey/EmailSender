@@ -1,10 +1,8 @@
-/* eslint-disable no-use-before-define */
 /**
  * Module dependencies.
  */
 
 const debug = require('debug')('sample-express:server');
-
 const http = require('http');
 
 const { app } = require('../app');
@@ -14,7 +12,6 @@ const { app } = require('../app');
  */
 
 const port = normalizePort(process.env.APP_PORT || '3000');
-
 app.set('port', port);
 
 /**
@@ -38,14 +35,11 @@ server.on('listening', onListening);
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
-  // eslint-disable-next-line no-restricted-globals
   if (isNaN(port)) {
-    // named pipe
     return val;
   }
 
   if (port >= 0) {
-    // port number
     return port;
   }
 

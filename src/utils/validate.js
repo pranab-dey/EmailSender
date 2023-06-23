@@ -7,36 +7,38 @@ const Validator = require('validatorjs');
  */
 
 Validator.registerImplicit(
-	'isArray',
-	(value) => {
-		if (value === undefined) return true;
-		return Array.isArray(value) && value.length > 0;
-	},
-	':attribute must be an array and not empty'
+  'isArray',
+  (value) => {
+    if (value === undefined) return true;
+    return Array.isArray(value) && value.length > 0;
+  },
+  ':attribute must be an array and not empty'
 );
 
 Validator.registerImplicit(
-	'isValidLength',
-	(value) => {
-		if (value === undefined) return true;
-		return Array.isArray(value) && value.length <= 5;
-	},
-	'Only 5 Images Allowed'
+  'isValidLength',
+  (value) => {
+    if (value === undefined) return true;
+    return Array.isArray(value) && value.length <= 5;
+  },
+  'Only 5 Images Allowed'
 );
 
 /**
  * List of validation rules
  */
 const validationRules = {
-	createCustomers: {
-		name: 'required',
-		email: 'required',
-		isEnaled: 'boolean',
-	},
-	getCustomers: {
-		page: 'required_if:page,|integer',
-		limit: 'required_if:page,|integer',
-	},
+  createCustomers: {
+    subject: 'required',
+    body: 'required',
+  },
+  customersFile: {
+    fieldname: 'required',
+  },
+  getCustomers: {
+    page: 'required_if:page,|integer',
+    limit: 'required_if:page,|integer',
+  },
 };
 
 /**
@@ -45,14 +47,16 @@ const validationRules = {
  * @returns object
  */
 const getRules = (type, data = {}) => {
-	switch (type) {
-		case 'createCustomers':
-			return validationRules.createCustomers;
-		case 'getCustomers':
-			return validationRules.getCustomers;
-		default:
-			return {};
-	}
+  switch (type) {
+    case 'createCustomers':
+      return validationRules.createCustomers;
+    case 'getCustomers':
+      return validationRules.getCustomers;
+    case 'customersFile':
+      return validationRules.customersFile;
+    default:
+      return {};
+  }
 };
 
 /**
@@ -61,24 +65,23 @@ const getRules = (type, data = {}) => {
  * @returns boolean / throw error
  */
 const validate = (type, data = {}) => {
-	const rules = getRules(type, data);
-	const validation = new Validator(data, rules);
-	if (validation.fails()) {
-		throw Object.assign({}, new Error(), {
-			status: 400,
-			data: {},
-			errors: validation.errors.all(),
-			message: `Invalid Parameter(s): ${Object.keys(
-				validation.errors.all()
-			)
-				.map((item) => item)
-				.join(',')}`,
-		});
-	}
-	return true;
+  const rules = getRules(type, data);
+  const validation = new Validator(data, rules);
+
+  if (validation.fails()) {
+    throw Object.assign({}, new Error(), {
+      status: 400,
+      data: {},
+      errors: validation.errors.all(),
+      message: `Invalid Parameter(s): ${Object.keys(validation.errors.all())
+        .map((item) => item)
+        .join(',')}`,
+    });
+  }
+  return true;
 };
 
 module.exports = {
-	getRules,
-	validate,
+  getRules,
+  validate,
 };

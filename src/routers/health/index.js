@@ -9,7 +9,7 @@ const express = require('express');
  * Load custom dependencies
  */
 
-const { health } = require('../controllers');
+const { health } = require('../../controllers');
 
 /**
  * Create Router

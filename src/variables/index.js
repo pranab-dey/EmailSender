@@ -17,23 +17,36 @@ const mongoDBUserName = process.env.MONGO_DB_USERNAME;
 const mongoDBPassword = process.env.MONGO_DB_PASSWORD;
 const mongoDBPort = process.env.MONGO_DB_PORT;
 
+const batchSize = process.env.EMAIL_QUEUE_BATCH_SIZE;
+
+const emailId = process.env.SENDER_EMAIL;
+const emailPassword = process.env.SENDER_EMAIL_PASSWORD;
+
+const redisUri = `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`;
+const redisPort = process.env.REDIS_PORT;
+
 /**
  * Expose variables so that other modules can use them
  */
 
 const variables = {
-	loggerName,
-	env,
-	appPort,
-	logLevel,
-	host,
-	apiRateLimitInterval,
-	apiMaxRequestLimit,
-	mongodbHost,
-	mongodbDBName,
-	mongoDBUserName,
-	mongoDBPassword,
-	mongoDBPort,
+  loggerName,
+  env,
+  appPort,
+  logLevel,
+  host,
+  apiRateLimitInterval,
+  apiMaxRequestLimit,
+  mongodbHost,
+  mongodbDBName,
+  mongoDBUserName,
+  mongoDBPassword,
+  mongoDBPort,
+  batchSize,
+  emailId,
+  emailPassword,
+  redisUri,
+  redisPort,
 };
 
 module.exports = variables;

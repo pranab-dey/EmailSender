@@ -4,22 +4,34 @@
 
 const mongoose = require('mongoose');
 const {
-	mongoDBUserName,
-	mongoDBPassword,
-	mongoDBPort,
-	mongodbHost,
-	mongodbDBName,
+  mongoDBUserName,
+  mongoDBPassword,
+  mongoDBPort,
+  mongodbHost,
+  mongodbDBName,
 } = require('../variables');
 
-const mongoURL = `mongodb://${mongoDBUserName}:${mongoDBPassword}@${mongodbHost}:${mongoDBPort}/${mongodbDBName}?authSource=admin`;
+const mongoUri = `mongodb://${mongodbHost}:${mongoDBPort}/${mongodbDBName}`;
 
-const connectWithRetry = () => {
-	mongoose.connect(mongoURL).catch((e) => {
-		console.log(e);
-		setTimeout(connectWithRetry, 5000);
-	});
+const connectDBwithRetry = () => {
+  console.log(':: mongoDB Uri ::: ', mongoUri);
+
+  mongoose.set('strictQuery', false);
+
+  mongoose
+    .connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log(':: MongoDB is connected with app :: ');
+    })
+    .catch((e) => {
+      console.log(e);
+      setTimeout(connectDBwithRetry, 5000);
+    });
 };
 
 module.exports = {
-	connectWithRetry,
+  connectDBwithRetry,
 };

@@ -1,23 +1,21 @@
 'use strict';
 
-const { errorResponseHandler, successResponseHandler } = require('../helpers');
-const { getAllGenres, createGenre } = require('../services');
+const {
+  errorResponseHandler,
+  successResponseHandler,
+  processCsv,
+} = require('../../helpers');
+const { emailQueue } = require('../../config');
 
 exports.createCustomers = async (req, res) => {
-	try {
-		const { name, description, isActive } = req.body;
-		const response = await createGenre({
-			name,
-			description,
-			isActive,
-		});
-
-		return successResponseHandler(
-			res,
-			response,
-			'Genre created successfully!'
-		);
-	} catch (error) {
-		return errorResponseHandler(error, req, res);
-	}
+  try {
+    await processCsv(req.file.path, req.body, emailQueue);
+    return successResponseHandler(
+      res,
+      {},
+      'customers added to queue successfully to send emails!'
+    );
+  } catch (error) {
+    return errorResponseHandler(error, req, res);
+  }
 };

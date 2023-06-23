@@ -13,15 +13,15 @@ const { errorResponseHandler } = require('../helpers');
  */
 
 const notFound = (req, res) =>
-	errorResponseHandler(
-		{
-			status: 404,
-			data: {},
-			errors: {},
-			message: `Not Found`,
-		},
-		req,
-		res
-	);
+  errorResponseHandler(
+    {
+      status: 404,
+      data: {},
+      errors: {},
+      message: `Not Found`,
+    },
+    req,
+    res
+  );
 
 module.exports = notFound;
