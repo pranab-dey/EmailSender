@@ -1,9 +1,5 @@
 version: '3.7'
 
-networks:
-  app-network:
-    driver: bridge
-
 services:
   # App Service
   app:
@@ -18,8 +14,6 @@ services:
         - BUILD_MODE=${BUILD_MODE}
         - UID=${UID}
         - GID=${GID}
-    container_name: palswalk-book-service
+    container_name: bulkEmailSender
     restart: unless-stopped
     tty: true
-    networks:
-      - app-network
