@@ -10,7 +10,8 @@
     "lint:fix": "eslint ./ --fix",
     "format": "prettier --write \"**/*.{js,jsx,json,scss}\"",
     "start:development": "nodemon -L bin/www",
-    "start:production": "node bin/www"
+    "start:production": "node bin/www",
+    "test": "mocha **/*.test.js"
   },
   "keywords": [],
   "author": "Pranab",
