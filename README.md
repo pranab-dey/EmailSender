@@ -73,5 +73,11 @@ After building the docker containers, you'll need to check whether everything is
 - run `docker ps` and check all the services are up and running
 - run `docker exec -it container_name sh` to enter into the app container. [change container_name with appropiate container name found from command]
 
+### Setup sender email
+
+- taking Gmail as an example. Sender email should have two factor authentication enabled. Go to gmail sender account settings, under security, generate custom app password and copy and paste to environment variable.
+
+- No need to use actual password. otherwise email would be counted as spams.
+
 
 
