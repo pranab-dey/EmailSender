@@ -33,9 +33,9 @@ API_RATE_LIMIT_INTERVAL_IN_MIN=1
 API_MAX_REQUEST_LIMIT=60
 
 # Mongo DB
-# (for Windows) MONGO_DB_HOST=host.docker.internal()
+# (for Windows) MONGO_DB_HOST=host.docker.internal
 # (for mac) MONGO_DB_HOST=docker.for.mac.host.internal
-# MONGO_DB_HOST=bulksendemailcluster.81fcded.mongodb.net
+
 MONGO_DB_HOST=docker.for.mac.host.internal
 MONGO_DB_NAME=emailProject
 MONGO_DB_USERNAME=mailProject
@@ -72,6 +72,12 @@ After building the docker containers, you'll need to check whether everything is
 
 - run `docker ps` and check all the services are up and running
 - run `docker exec -it container_name sh` to enter into the app container. [change container_name with appropiate container name found from command]
+
+### Setup sender email
+
+- taking Gmail as an example. Sender email should have two factor authentication enabled. Go to gmail sender account settings, under security, generate custom app password and copy and paste to environment variable.
+
+- No need to use actual password. otherwise email would be counted as spams.
 
 
 
