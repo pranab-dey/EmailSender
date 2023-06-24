@@ -56,7 +56,7 @@ const emailQueueProcessor = async (job, done) => {
           return buildDbItem(resp, item);
         } else throw Error;
       } catch (error) {
-        if (error)
+        if (error.message)
           console.error(':: Sending Email Failed in Queue ::', error.message);
         else
           console.error(':: Sending Email Failed as Enabled field is falsy ::');
